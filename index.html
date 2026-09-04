@@ -1,1 +1,961 @@
-@/workspace/fukuoka-walk/index.html
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fukuoka in 5 or 6 days: ramen, parks, and one day trip</title>
+  <meta name="description" content="A walking-first Fukuoka itinerary for 5 or 6 days. Hakata and Tenjin, yatai, ramen, Ōhori Park, plus Dazaifu, Itoshima, or Yanagawa. Dates TBA." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="https://res.cloudinary.com/hkbqoewq/image/upload/f_auto,q_auto/sites/fukuoka-itinerary/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="https://res.cloudinary.com/hkbqoewq/image/upload/f_auto,q_auto,w_180,h_180,c_fit/sites/fukuoka-itinerary/apple-touch-icon.png" />
+  <style>
+    :root {
+      --ink: #0b0a09;
+      --ink-2: #15120f;
+      --ink-3: #1f1a15;
+      --paper: #f2e8d6;
+      --paper-dim: #e4d5bc;
+      --lantern: #e9a04c;
+      --lantern-deep: #c56a24;
+      --mist: #b7a994;
+      --foam: #f7f0e4;
+      --river: #2a3d4a;
+      --measure: 68ch;
+      --pad: clamp(1.25rem, 4vw, 2.5rem);
+      --rail: min(72rem, calc(100% - 2 * var(--pad)));
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --font-display: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      --font-body: "Zen Kaku Gothic New", "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: clamp(1.02rem, 0.96rem + 0.3vw, 1.125rem);
+      line-height: 1.65;
+      color: var(--foam);
+      background: var(--ink);
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background: color-mix(in srgb, var(--lantern) 55%, transparent);
+      color: var(--ink);
+    }
+
+    a {
+      color: var(--lantern);
+      text-underline-offset: 0.18em;
+      text-decoration-thickness: 1px;
+    }
+    a:hover { color: var(--paper); }
+    a:focus-visible {
+      outline: 2px solid var(--lantern);
+      outline-offset: 3px;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .skip {
+      position: absolute;
+      left: var(--pad);
+      top: 0.75rem;
+      z-index: 100;
+      padding: 0.55rem 0.9rem;
+      background: var(--lantern);
+      color: var(--ink);
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 0.25rem;
+      transform: translateY(-150%);
+    }
+    .skip:focus { transform: translateY(0); }
+
+    .wrap {
+      width: var(--rail);
+      margin-inline: auto;
+    }
+
+    /* —— Hero —— */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      color: var(--foam);
+    }
+    .hero__media {
+      position: absolute;
+      inset: 0;
+    }
+    .hero__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+    }
+    .hero__veil {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg,
+          rgba(11, 10, 9, 0.35) 0%,
+          rgba(11, 10, 9, 0.55) 42%,
+          rgba(11, 10, 9, 0.92) 78%,
+          var(--ink) 100%),
+        radial-gradient(ellipse 80% 55% at 70% 20%,
+          rgba(233, 160, 76, 0.18), transparent 60%);
+    }
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      width: var(--rail);
+      margin-inline: auto;
+      padding: calc(var(--pad) + 3rem) var(--pad) clamp(2.5rem, 8vh, 4.5rem);
+      max-width: 40rem;
+      margin-left: max(var(--pad), calc((100% - var(--rail)) / 2));
+    }
+    .hero h1 {
+      margin: 0 0 1rem;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(2.15rem, 1.4rem + 3.2vw, 3.65rem);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      text-wrap: balance;
+      max-width: 14ch;
+    }
+    .hero__lead {
+      margin: 0;
+      max-width: 38ch;
+      color: var(--mist);
+      font-size: clamp(1.05rem, 1rem + 0.25vw, 1.2rem);
+      line-height: 1.55;
+    }
+    .hero__scroll {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-top: 2rem;
+      color: var(--lantern);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .hero__scroll svg { width: 1rem; height: 1rem; }
+
+    /* —— Nav —— */
+    .toc {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: color-mix(in srgb, var(--ink) 88%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid color-mix(in srgb, var(--paper) 12%, transparent);
+    }
+    .toc__inner {
+      width: var(--rail);
+      margin-inline: auto;
+      padding: 0.7rem var(--pad);
+      display: flex;
+      gap: 0.35rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: var(--lantern-deep) transparent;
+    }
+    .toc a {
+      flex: 0 0 auto;
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      color: var(--mist);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      border: 1px solid transparent;
+    }
+    .toc a:hover,
+    .toc a[aria-current="true"] {
+      color: var(--ink);
+      background: var(--lantern);
+      border-color: var(--lantern);
+    }
+
+    /* —— Sections —— */
+    main section {
+      padding: clamp(3rem, 7vw, 5.5rem) 0;
+    }
+    main section + section {
+      border-top: 1px solid color-mix(in srgb, var(--paper) 10%, transparent);
+    }
+
+    .section-head {
+      width: var(--rail);
+      margin: 0 auto 1.75rem;
+      padding-inline: var(--pad);
+    }
+    .section-head h2 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(1.65rem, 1.25rem + 1.6vw, 2.35rem);
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+      text-wrap: balance;
+      max-width: 22ch;
+    }
+
+    .prose {
+      width: var(--rail);
+      margin-inline: auto;
+      padding-inline: var(--pad);
+      max-width: calc(var(--measure) + 2 * var(--pad));
+    }
+    .prose p { margin: 0 0 1.1rem; color: var(--mist); }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose strong { color: var(--foam); font-weight: 700; }
+    .prose em { font-style: italic; color: var(--paper); }
+
+    .do-this {
+      width: var(--rail);
+      margin: 1.5rem auto 0;
+      padding-inline: var(--pad);
+      max-width: calc(var(--measure) + 2 * var(--pad));
+    }
+    .do-this__inner {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.85rem 1rem;
+      padding: 1rem 1.15rem;
+      background: var(--ink-2);
+      border: 1px solid color-mix(in srgb, var(--lantern) 35%, transparent);
+      border-radius: 0.35rem;
+    }
+    .do-this__mark {
+      width: 0.55rem;
+      height: 0.55rem;
+      margin-top: 0.55rem;
+      border-radius: 50%;
+      background: var(--lantern);
+    }
+    .do-this p {
+      margin: 0;
+      color: var(--foam);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+    .do-this__label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--lantern);
+      margin-bottom: 0.25rem;
+    }
+
+    /* —— Plates —— */
+    .plate {
+      width: var(--rail);
+      margin: 1.75rem auto;
+      padding-inline: var(--pad);
+    }
+    .plate figure { margin: 0; }
+    .plate img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      border-radius: 0.2rem;
+      background: var(--ink-3);
+    }
+    .plate figcaption {
+      margin-top: 0.55rem;
+      font-size: 0.82rem;
+      color: var(--mist);
+      line-height: 1.45;
+    }
+    .plate--pair {
+      display: grid;
+      gap: 1rem;
+    }
+    @media (min-width: 720px) {
+      .plate--pair {
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+      }
+    }
+
+    /* —— Day blocks —— */
+    .day {
+      scroll-margin-top: 4rem;
+    }
+    .day__layout {
+      width: var(--rail);
+      margin-inline: auto;
+      padding-inline: var(--pad);
+      display: grid;
+      gap: 1.5rem;
+    }
+    @media (min-width: 900px) {
+      .day__layout {
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+        gap: 2.5rem;
+        align-items: start;
+      }
+      .day--flip .day__copy { order: 2; }
+      .day--flip .day__media { order: 1; }
+    }
+    .day__copy h2 {
+      margin: 0 0 1rem;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(1.55rem, 1.2rem + 1.4vw, 2.15rem);
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+      text-wrap: balance;
+    }
+    .day__copy p {
+      margin: 0 0 1rem;
+      color: var(--mist);
+      max-width: var(--measure);
+    }
+    .day__copy .do-this {
+      width: auto;
+      max-width: none;
+      margin: 1.25rem 0 0;
+      padding: 0;
+    }
+    .swap-list {
+      margin: 1rem 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 1rem;
+    }
+    .swap-list li {
+      padding: 1rem 1.1rem;
+      background: var(--ink-2);
+      border-radius: 0.3rem;
+      border: 1px solid color-mix(in srgb, var(--paper) 10%, transparent);
+    }
+    .swap-list strong {
+      display: block;
+      color: var(--foam);
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      margin-bottom: 0.35rem;
+    }
+    .swap-list p { margin: 0; color: var(--mist); font-size: 0.98rem; }
+
+    /* —— Food —— */
+    .food-grid {
+      width: var(--rail);
+      margin: 0 auto;
+      padding-inline: var(--pad);
+      display: grid;
+      gap: 1rem;
+    }
+    @media (min-width: 720px) {
+      .food-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .food-item {
+      padding: 1.15rem 1.2rem;
+      background: var(--ink-2);
+      border-radius: 0.3rem;
+      border: 1px solid color-mix(in srgb, var(--paper) 10%, transparent);
+    }
+    .food-item h3 {
+      margin: 0 0 0.45rem;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--foam);
+    }
+    .food-item p {
+      margin: 0;
+      color: var(--mist);
+      font-size: 0.98rem;
+    }
+
+    .glance {
+      width: var(--rail);
+      margin: 0 auto;
+      padding-inline: var(--pad);
+      display: grid;
+      gap: 0.85rem;
+    }
+    @media (min-width: 640px) {
+      .glance { grid-template-columns: 1fr 1fr; }
+    }
+    .glance article {
+      padding: 1.1rem 1.15rem;
+      background: var(--ink-2);
+      border-radius: 0.3rem;
+      border-top: 2px solid var(--lantern-deep);
+    }
+    .glance h3 {
+      margin: 0 0 0.35rem;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--foam);
+    }
+    .glance p { margin: 0; color: var(--mist); font-size: 0.95rem; }
+
+    .source {
+      background: var(--ink-2);
+    }
+    .source .prose p { color: var(--mist); font-size: 0.95rem; }
+
+    footer {
+      padding: 2.5rem 0 3.5rem;
+      border-top: 1px solid color-mix(in srgb, var(--paper) 10%, transparent);
+    }
+    footer .wrap {
+      padding-inline: var(--pad);
+    }
+    footer h2 {
+      margin: 0 0 0.75rem;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--foam);
+    }
+    footer ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 0.35rem;
+      color: var(--mist);
+      font-size: 0.85rem;
+    }
+    footer .colophon {
+      margin-top: 1.5rem;
+      color: var(--mist);
+      font-size: 0.82rem;
+    }
+
+    /* —— Reveal —— */
+    .reveal {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      transition:
+        opacity 700ms var(--ease),
+        transform 700ms var(--ease),
+        filter 700ms var(--ease);
+    }
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(1.1rem);
+      filter: blur(2px);
+    }
+    .js .reveal.is-in {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .js .reveal,
+      .js .reveal.is-in {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="hero" id="top">
+    <div class="hero__media" aria-hidden="true">
+      <img
+        src="https://res.cloudinary.com/hkbqoewq/image/upload/f_auto,q_auto,w_1600/sites/fukuoka-itinerary/hero-nakasu.jpg"
+        alt=""
+        width="1600"
+        height="1067"
+        fetchpriority="high"
+      />
+      <div class="hero__veil"></div>
+    </div>
+    <div class="hero__content">
+      <h1>Fukuoka for a week that still feels like a city break</h1>
+      <p class="hero__lead">I am building this for a 5 or 6 day trip with dates still open. The mix is scenery, food, and city walking. Base yourself near Hakata Station, Tenjin, or Nakasu. The airport subway drops you into the city fast. Do not treat any clock or fare here as fixed. Recheck operators before you go.</p>
+      <a class="hero__scroll" href="#intro">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v10M3 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Walk the plan
+      </a>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Itinerary sections">
+    <div class="toc__inner">
+      <a href="#city">City</a>
+      <a href="#when">When</a>
+      <a href="#day-1">Day 1</a>
+      <a href="#day-2">Day 2</a>
+      <a href="#day-3">Day 3</a>
+      <a href="#day-4">Day 4</a>
+      <a href="#day-5">Day 5</a>
+      <a href="#day-6">Day 6</a>
+      <a href="#food">Food</a>
+      <a href="#day-trips">Day trips</a>
+      <a href="#getting-around">Transit</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <section id="intro" class="reveal" aria-label="Introduction">
+      <div class="do-this">
+        <div class="do-this__inner">
+          <span class="do-this__mark" aria-hidden="true"></span>
+          <div>
+            <span class="do-this__label">Do this</span>
+            <p>Pick Hakata for the rail gateway, or Tenjin if you want the fashion and underground mall side.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="city" class="reveal">
+      <div class="section-head">
+        <h2>How the city sits</h2>
+      </div>
+      <div class="prose">
+        <p>Hakata sits east. Tenjin sits west. Nakasu is the island between them, with yatai and nightlife along the Naka River. Canal City Hakata sits south-east of Nakasu. Kawabata Arcade links the old town toward Canal City.</p>
+        <p>West of Tenjin you get green space at Ōhori Park and Maizuru. Out on the bay: Hakata Port, Seaside Momochi with Fukuoka Tower, and the sandbar toward Uminonakamichi and Shikanoshima.</p>
+      </div>
+      <div class="do-this">
+        <div class="do-this__inner">
+          <span class="do-this__mark" aria-hidden="true"></span>
+          <div>
+            <span class="do-this__label">Do this</span>
+            <p>Learn Hakata, Tenjin, and Nakasu first. Everything else hangs off those three.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="when" class="reveal">
+      <div class="section-head">
+        <h2>When to go (soft)</h2>
+      </div>
+      <div class="prose">
+        <p>JNTO calls autumn the most enjoyable weather for Fukuoka. Spring brings blossom. Summer brings heat and beaches. Winter brings warming food.</p>
+        <p>JMA Fukuoka Observatory normals (1991 to 2020) put the coolest months in January and February, and the warmest in August. June and July are the wettest. October to February run drier. Northern Kyushu's baiu rainy season usually starts around early June and ends around mid July, with big year-to-year swings. Midsummer can bring <em>mōshobi</em> days at or above 35°C, tropical nights, and thunderstorms. September often stays rainy. Typhoon approaches in northern Kyushu peak in August and September. Weather usually steadies more in October and November.</p>
+        <p>There is no single official "best month" for the city alone. Treat spring and autumn comfort as an inference from JNTO and the normals.</p>
+      </div>
+      <div class="do-this">
+        <div class="do-this__inner">
+          <span class="do-this__mark" aria-hidden="true"></span>
+          <div>
+            <span class="do-this__label">Do this</span>
+            <p>If you hate heat and typhoon season, favour October or November. If you book June or July, pack for rain.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="day-1" class="day reveal">
+      <div class="day__layout">
+        <div class="day__copy">
+          <h2>Day 1. Hakata old town into Nakasu night</h2>
+          <p>Walk Kushida Shrine, then Kawabata Arcade (about 400 m, roughly 130 shops), then Canal City Hakata. Evening: Nakasu yatai by the river. Soft food night: tonkotsu ramen or a yatai stool. An optional river cruise is listed; verify before you count on it.</p>
+          <div class="do-this">
+            <div class="do-this__inner">
+              <span class="do-this__mark" aria-hidden="true"></span>
+              <div>
+                <span class="do-this__label">Do this</span>
+                <p>Keep Day 1 on foot. Save the day trips for later.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="day__media plate--pair plate" style="padding:0;margin:0;width:auto">
+          <figure>
+            <img
+              src="https://res.cloudinary.com/hkbqoewq/image/upload/f_auto,q_auto,w_900/sites/fukuoka-itinerary/kushida.jpg"
+              alt="Kushida Shrine, Hakata."
+              width="900"
+              height="600"
+              loading="lazy"
+            />
+            <figcaption>Kushida Shrine, Hakata. Wikimedia Commons.</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="https://res.cloudinary.com/hkbqoewq/image/upload/f_auto,q_auto,w_900/sites/fukuoka-itinerary/canal.jpg"
+              alt="Canal City Hakata canal and buildings."
+              width="900"
+              height="600"
+              loading="lazy"
+            />
+            <figcaption>Canal City Hakata. Wikimedia Commons.</figcaption>
+          </figure>
+        </div>
+      </div>
+      <figure class="plate">
+        <img
+          src="https://res.cloudinary.com/hkbqoewq/image/upload/f_auto,q_auto,w_900/sites/fukuoka-itinerary/yatai.jpg"
+          alt="Yatai stalls by the Naka River at night."
+          width="900"
+          height="600"
+          loading="lazy"
+        />
+        <figcaption>Yatai noren and shared counters by the Naka River. Wikimedia Commons.</figcaption>
+      </figure>
+    </section>
+
+    <section id="day-2" class="day day--flip reveal">
+      <div class="day__layout">
+        <div class="day__copy">
+          <h2>Day 2. Tenjin and the kitchen market</h2>
+          <p>Morning at Yanagibashi Rengo Market in Haruyoshi if it is open. Listings say closed Sundays and holidays; reconfirm on the market site. Then the Tenjin underground mall (Chikagai), ACROS, and Daimyo for fashion and cafés. Evening: Tenjin yatai, or walk Oyafuko-dōri for the nightlife atmosphere without treating this as a party guide.</p>
+          <div class="do-this">
+            <div class="do-this__inner">
+              <span class="do-this__mark" aria-hidden="true"></span>
+              <div>
+                <span class="do-this__label">Do this</span>
+                <p>Check the market calendar the night before. If it is shut, start in Chikagai instead.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="day__media">
+          <figure class="plate" style="padding:0;margin:0;width:auto">
+            <img
+              src="https://res.cloudinary.com/hkbqoewq/image/upload/f_auto,q_auto,w_900/sites/fukuoka-itinerary/tenjin.jpg"
+              alt="Meiji-dori near Nakasu toward Tenjin."
+              width="900"
+              height="600"
+              loading="lazy"
+            />
+            <figcaption>Meiji-dori near Nakasu toward Tenjin. Wikimedia Commons.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="day-3" class="day reveal">
+      <div class="day__layout">
+        <div class="day__copy">
+          <h2>Day 3. Day trip to Dazaifu</h2>
+          <p>Take the Nishitetsu from Tenjin (about 30 minutes with a change at Futsukaichi) or a bus from Hakata (about 40 minutes). Aim for Dazaifu Tenmangū. Optional: Kyushu National Museum; check museum closed days before you go. Return to Fukuoka the same day.</p>
+          <div class="do-this">
+            <div class="do-this__inner">
+              <span class="do-this__mark" aria-hidden="true"></span>
+              <div>
+                <span class="do-this__label">Do this</span>
+                <p>Make Dazaifu your default day trip if you only have one.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="day__media">
+          <figure class="plate" style="padding:0;margin:0;width:auto">
+            <img
+              src="https://res.cloudinary.com/hkbqoewq/image/upload/f_auto,q_auto,w_900/sites/fukuoka-itinerary/dazaifu.jpg"
+              alt="Dazaifu Tenmangū shrine grounds."
+              width="900"
+              height="600"
+              loading="lazy"
+            />
+            <figcaption>Dazaifu Tenmangū shrine grounds. Wikimedia Commons.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="day-4" class="day day--flip reveal">
+      <div class="day__layout">
+        <div class="day__copy">
+          <h2>Day 4. One scenery day (pick one)</h2>
+          <ul class="swap-list">
+            <li>
+              <strong>Default: Itoshima.</strong>
+              <p>Beaches, cafés, Futamigaura and Meoto Iwa. Showa West Coast Liner from the city is about an hour, with limited runs (check the PDF). Or JR Chikuhi plus local bus. A car is easier if you want several stops. Watch the last bus back.</p>
+            </li>
+            <li>
+              <strong>Swap: Uminonakamichi Seaside Park.</strong>
+              <p>National park sandbar, seasonal flowers, cycling, sea air. JR via Kashii to Uminonakamichi is about 40 minutes one way (confirm JR), or the Uminaka ferry from Momochi or Hakata Pier is about 20 minutes. Half day to full day. Admission and closed days sit on the park calendar only.</p>
+            </li>
+            <li>
+              <strong>Swap: Yanagawa.</strong>
+              <p>Nishitetsu from Tenjin toward Ōmuta, get off at Nishitetsu Yanagawa (about 45 to 50 minutes), then a <em>donko-bune</em> canal cruise of about 60 minutes through the castle-town canals. Full day from Fukuoka. In summer, the operator has suspended midday cruises in a window (listed as 1 Jul to 15 Sep for 2026 on the operator site). Recheck before you book.</p>
+            </li>
+          </ul>
+          <div class="do-this">
+            <div class="do-this__inner">
+              <span class="do-this__mark" aria-hidden="true"></span>
+              <div>
+                <span class="do-this__label">Do this</span>
+                <p>Choose one scenery day. Do not try to stack Itoshima and Yanagawa.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="day__media">
+          <figure class="plate" style="padding:0;margin:0;width:auto">
+            <img
+              src="https://res.cloudinary.com/hkbqoewq/image/upload/f_auto,q_auto,w_900/sites/fukuoka-itinerary/itoshima.jpg"
+              alt="Futamigaura / Meoto Iwa coast, Itoshima."
+              width="900"
+              height="600"
+              loading="lazy"
+            />
+            <figcaption>Futamigaura / Meoto Iwa, Itoshima. Wikimedia Commons.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="day-5" class="day reveal">
+      <div class="day__layout">
+        <div class="day__copy">
+          <h2>Day 5. Ōhori Park and the west bay</h2>
+          <p>Subway to Ōhorikōen. Loop the moat lake (Ukimi pavilion, optional boat hire). Pair with Nishi Park for hilltop bay and city views (steep walk, 45 to 90 minutes). Optional: Seaside Momochi and Fukuoka Tower (234 m, 360° deck). Evening: motsunabe in the Hakata area, or Nagahama-style ramen.</p>
+          <div class="do-this">
+            <div class="do-this__inner">
+              <span class="do-this__mark" aria-hidden="true"></span>
+              <div>
+                <span class="do-this__label">Do this</span>
+                <p>If legs are tired, do Ōhori only and skip the tower.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="day__media plate--pair plate" style="padding:0;margin:0;width:auto">
+          <figure>
+            <img
+              src="https://res.cloudinary.com/hkbqoewq/image/upload/f_auto,q_auto,w_900/sites/fukuoka-itinerary/ohori.jpg"
+              alt="View toward Ōhori / Fukuoka Castle grounds."
+              width="900"
+              height="600"
+              loading="lazy"
+            />
+            <figcaption>Toward Ōhori / Fukuoka Castle grounds. Wikimedia Commons.</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="https://res.cloudinary.com/hkbqoewq/image/upload/f_auto,q_auto,w_900/sites/fukuoka-itinerary/tower.jpg"
+              alt="Fukuoka Tower and Seaside Momochi."
+              width="900"
+              height="600"
+              loading="lazy"
+            />
+            <figcaption>Fukuoka Tower and Seaside Momochi. Wikimedia Commons.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="day-6" class="day reveal">
+      <div class="section-head">
+        <h2>Day 6. Buffer (drop this for a 5-day trip)</h2>
+      </div>
+      <div class="prose">
+        <p>Nokonoshima by ferry from Meinohama (about 10 minutes), or a slow museum and shop day (Riverain / Asian Art), or leave for the airport on the subway.</p>
+        <p><strong>5-day compress:</strong> Drop Day 6. Or keep only one day trip (prefer Dazaifu) and give the extra day back to yatai, markets, and Ōhori.</p>
+      </div>
+      <div class="do-this">
+        <div class="do-this__inner">
+          <span class="do-this__mark" aria-hidden="true"></span>
+          <div>
+            <span class="do-this__label">Do this</span>
+            <p>If your flight is evening-out on day 5, stop at Day 5 and skip the buffer.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="food" class="reveal">
+      <div class="section-head">
+        <h2>Food musts</h2>
+      </div>
+      <figure class="plate">
+        <img
+          src="https://res.cloudinary.com/hkbqoewq/image/upload/f_auto,q_auto,w_900/sites/fukuoka-itinerary/ramen.jpg"
+          alt="Tonkotsu ramen bowl at a Fukuoka yatai."
+          width="900"
+          height="600"
+          loading="lazy"
+        />
+        <figcaption>Tonkotsu ramen at a Fukuoka yatai. Wikimedia Commons.</figcaption>
+      </figure>
+      <div class="food-grid">
+        <article class="food-item">
+          <h3>Yatai</h3>
+          <p>Street stalls with shared counters. Clusters at Nakasu (riverside, touristy), Tenjin (densest, more local), and Nagahama (ramen roots). Roughly 100 stalls citywide. Weather and owners decide who is open. City LINE tools exist for open status. Do not chase a single "best stall". Mentai Chūdoku in Nagahama appears on yokanavi as a named example only, not a ranking.</p>
+        </article>
+        <article class="food-item">
+          <h3>Tonkotsu / Hakata ramen</h3>
+          <p>Cloudy pork broth, thin noodles, <em>kaedama</em> (extra noodles). Nagahama is where the thin-noodle and kaedama story sits. Skip chain rankings.</p>
+        </article>
+        <article class="food-item">
+          <h3>Mentaiko</h3>
+          <p>Spicy cured pollock roe. Tourism pages tie the karashi mentaiko origin story to Fukuya in Nakasu in 1949. Named meal spot: Ganso Hakata Mentaiju in Nishi-Nakasu. Buy at markets; makers are citywide.</p>
+        </article>
+        <article class="food-item">
+          <h3>Motsunabe</h3>
+          <p>Offal hotpot. Hakata specialist belt and izakaya citywide. Often finished with champon noodles. Stick to the Hakata area. No single official must-shop.</p>
+        </article>
+        <article class="food-item">
+          <h3>Yanagibashi Rengo Market</h3>
+          <p>"Hakata's kitchen" in Haruyoshi. Fish, mentaiko, vegetables. About 3 minutes from Watanabe-dōri. Closed Sundays and holidays on the listing; reconfirm.</p>
+        </article>
+        <article class="food-item">
+          <h3>Nagahama Fish Market / Market Hall</h3>
+          <p>Wholesale market with public Market Hall restaurants. Citizens' Appreciation Day opens broader retail; schedules conflict across tourism pages, so use the official calendar. About 12 minutes' walk from Akasaka.</p>
+        </article>
+      </div>
+      <div class="do-this">
+        <div class="do-this__inner">
+          <span class="do-this__mark" aria-hidden="true"></span>
+          <div>
+            <span class="do-this__label">Do this</span>
+            <p>Hit yatai one night, Mentaiju or a market for mentaiko another day, and leave one dinner for motsunabe.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="day-trips" class="reveal">
+      <div class="section-head">
+        <h2>Day-trip options at a glance</h2>
+      </div>
+      <div class="glance">
+        <article>
+          <h3>Dazaifu</h3>
+          <p>Best public-transport half or full day. Shrine first. Museum if open.</p>
+        </article>
+        <article>
+          <h3>Itoshima</h3>
+          <p>Full day for coast and Meoto Iwa. Limited bus runs. Last bus matters.</p>
+        </article>
+        <article>
+          <h3>Yanagawa</h3>
+          <p>Full day for canal boats and willows. Confirm the summer midday cruise rules.</p>
+        </article>
+        <article>
+          <h3>Nokonoshima</h3>
+          <p>Optional sixth-day island. Short ferry from Meinohama.</p>
+        </article>
+      </div>
+      <div class="do-this">
+        <div class="do-this__inner">
+          <span class="do-this__mark" aria-hidden="true"></span>
+          <div>
+            <span class="do-this__label">Do this</span>
+            <p>Book the day-trip transit the night before. Do not leave last trains and last buses to chance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="getting-around" class="reveal">
+      <div class="section-head">
+        <h2>Getting around (high level only)</h2>
+      </div>
+      <div class="prose">
+        <p>Domestic terminal links to subway station Fukuoka-kūkō. International and domestic terminals share a free shuttle (about 10 minutes; confirm the airport site). Tourism pages put Airport to Hakata at about 5 minutes by subway, and Airport to Tenjin at about 11 minutes. Hakata to Tenjin is about 5 minutes. Operators: City Subway (Kūkō, Hakozaki, Nanakuma lines), JR at Hakata, Nishitetsu trains and buses from Tenjin.</p>
+      </div>
+      <div class="do-this">
+        <div class="do-this__inner">
+          <span class="do-this__mark" aria-hidden="true"></span>
+          <div>
+            <span class="do-this__label">Do this</span>
+            <p>Buy a subway ticket that matches your base. Recheck fares on the day.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="source" class="source reveal">
+      <div class="section-head">
+        <h2>Source note</h2>
+      </div>
+      <div class="prose">
+        <p>Places and claims come from the research brief compiled 4 Sep 2026 (SGT) from JNTO, JMA, Crossroad Fukuoka, gofukuoka, yokanavi, operators, and shop or market sites listed there. Hours, prices, closed days, fares, fountain intervals, and liner timetables were left out on purpose. Recheck before you travel.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <h2>Image credits</h2>
+      <ul>
+        <li>Hero / Nakasu night — Wikimedia Commons (Nakasu / Naka River night view)</li>
+        <li>Kushida Shrine — Wikimedia Commons</li>
+        <li>Canal City Hakata — Wikimedia Commons</li>
+        <li>Yatai by the Naka River — Wikimedia Commons</li>
+        <li>Tenjin / Meiji-dori — Wikimedia Commons (Meiji-dori Nakasu 20220512)</li>
+        <li>Dazaifu Tenmangū — Wikimedia Commons</li>
+        <li>Itoshima / Futamigaura — Wikimedia Commons (Sakurai Futamigaura)</li>
+        <li>Ōhori / castle grounds — Wikimedia Commons</li>
+        <li>Fukuoka Tower / Seaside Momochi — Wikimedia Commons</li>
+        <li>Tonkotsu ramen — Wikimedia Commons</li>
+      </ul>
+      <p class="colophon">Fukuoka Walk · for Gerald Ho · dates TBA</p>
+    </div>
+  </footer>
+
+  <script>
+    document.documentElement.classList.add("js");
+
+    (function () {
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var nodes = document.querySelectorAll(".reveal");
+      if (reduce || !("IntersectionObserver" in window)) {
+        nodes.forEach(function (el) { el.classList.add("is-in"); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-in");
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+      nodes.forEach(function (el) { io.observe(el); });
+    })();
+
+    (function () {
+      var links = document.querySelectorAll('.toc a[href^="#"]');
+      var map = [];
+      links.forEach(function (a) {
+        var id = a.getAttribute("href").slice(1);
+        var el = document.getElementById(id);
+        if (el) map.push({ a: a, el: el });
+      });
+      if (!map.length || !("IntersectionObserver" in window)) return;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          links.forEach(function (l) { l.removeAttribute("aria-current"); });
+          var hit = map.find(function (m) { return m.el === entry.target; });
+          if (hit) hit.a.setAttribute("aria-current", "true");
+        });
+      }, { rootMargin: "-35% 0px -55% 0px", threshold: 0 });
+      map.forEach(function (m) { io.observe(m.el); });
+    })();
+  </script>
+</body>
+</html>
